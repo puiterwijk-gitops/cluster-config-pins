@@ -58,4 +58,4 @@ jobs:
             --title "Update pin for cluster ${{ github.event.inputs.cluster }}" \
             --body "This PR updates the pin for the cluster ${{ github.event.inputs.cluster }} to the latest commit in the cluster-config repository:  ${{ steps.cluster-config-checkout.outputs.commit }}" \
             --base main \
-            --head update-${{ github.event.inputs.cluster }}
+            --head update-${{ github.event.inputs.cluster }} || echo "PR probably already existed. Ignoring."
