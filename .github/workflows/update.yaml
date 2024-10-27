@@ -37,7 +37,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git checkout -b update-${{ github.event.inputs.cluster }}-${{ steps.cluster-config-checkout.outputs.commit }}
+          git checkout -b update-${{ github.event.inputs.cluster }}
           sed -i \
             's|github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/${{ github.event.inputs.cluster }}?ref=\([a-f0-9]\{40\}\)|github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/${{ github.event.inputs.cluster }}?ref=${{ steps.cluster-config-checkout.outputs.commit }}|' \
             bootstrap/overlays/${{ github.event.inputs.cluster }}/kustomization.yaml
@@ -52,10 +52,10 @@ jobs:
           git commit -m "Update pin for cluster ${{ github.event.inputs.cluster }} to ${{ steps.cluster-config-checkout.outputs.commit }}"
           git show HEAD
 
-          git push origin update-${{ github.event.inputs.cluster }}-${{ steps.cluster-config-checkout.outputs.commit }}
+          git push origin update-${{ github.event.inputs.cluster }} --force
 
           gh pr create \
             --title "Update pin for cluster ${{ github.event.inputs.cluster }}" \
             --body "This PR updates the pin for the cluster ${{ github.event.inputs.cluster }} to the latest commit in the cluster-config repository:  ${{ steps.cluster-config-checkout.outputs.commit }}" \
             --base main \
-            --head update-${{ github.event.inputs.cluster }}-${{ steps.cluster-config-checkout.outputs.commit }}
+            --head update-${{ github.event.inputs.cluster }}
