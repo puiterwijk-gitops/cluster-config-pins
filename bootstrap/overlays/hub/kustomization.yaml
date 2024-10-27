@@ -1,2 +1,2 @@
 resources:
-  - github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/hub?ref=main
+  - github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/hub?ref=55737dc318606a62b33ce7dbc484666f18079a98
