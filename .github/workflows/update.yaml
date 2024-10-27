@@ -34,5 +34,9 @@ jobs:
             's|github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/${{ github.event.inputs.cluster }}?ref=\([a-f0-9]\{40\}\)|github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/${{ github.event.inputs.cluster }}?ref=${{ steps.cluster-config-checkout.outputs.commit }}|' \
             bootstrap/overlays/${{ github.event.inputs.cluster }}/kustomization.yaml
           git add bootstrap/overlays/${{ github.event.inputs.cluster }}/kustomization.yaml
+
+          git config user.name "Auto-updater (on behalf of ${{ github.actor }})"
+          git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+
           git commit -m "Update pin for cluster ${{ github.event.inputs.cluster }} to ${{ steps.cluster-config-checkout.outputs.commit }}"
           git show HEAD
