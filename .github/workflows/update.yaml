@@ -36,6 +36,9 @@ jobs:
           sed -i \
             's|github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/${{ github.event.inputs.cluster }}?ref=\([a-f0-9]\{40\}\)|github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/${{ github.event.inputs.cluster }}?ref=${{ steps.cluster-config-checkout.outputs.commit }}|' \
             bootstrap/overlays/${{ github.event.inputs.cluster }}/kustomization.yaml
+
+          git diff --exit-code && exit 0
+
           git add bootstrap/overlays/${{ github.event.inputs.cluster }}/kustomization.yaml
 
           git config user.name "Auto-updater (on behalf of ${{ github.actor }})"
