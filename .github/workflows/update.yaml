@@ -31,7 +31,7 @@ jobs:
         run: |
           git checkout -b update-${{ github.job }}
           sed -i \
-            's|github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/${{ github.event.inputs.cluster }}?ref=\([a-f0-9]\{40\}\)|github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/${{ github.event.inputs.cluster }}?ref=${{ steps.cluster-config-checkout.outputs.commit }}|'
+            's|github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/${{ github.event.inputs.cluster }}?ref=\([a-f0-9]\{40\}\)|github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/${{ github.event.inputs.cluster }}?ref=${{ steps.cluster-config-checkout.outputs.commit }}|' \
             bootstrap/overlays/${{ github.event.inputs.cluster }}/kustomization.yaml
           git add bootstrap/overlays/${{ github.event.inputs.cluster }}/kustomization.yaml
           git commit -m "Update pin for cluster ${{ github.event.inputs.cluster }} to ${{ steps.cluster-config-checkout.outputs.commit }}"
