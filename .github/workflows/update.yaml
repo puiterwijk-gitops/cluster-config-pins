@@ -1,3 +1,5 @@
+name: "Update Cluster Config pin for a cluster"
+
 on:
   workflow_dispatch:
     inputs:
@@ -20,7 +22,7 @@ jobs:
         with:
           repository: "puiterwijk-gitops/cluster-config"
           ref: "main"
-          path: "/tmp/cluster-config"
+          path: "cluster-config-repo"
           sparse-checkout: .
       - name: Print ref
         run: |
