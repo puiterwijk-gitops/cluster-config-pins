@@ -40,3 +40,5 @@ jobs:
 
           git commit -m "Update pin for cluster ${{ github.event.inputs.cluster }} to ${{ steps.cluster-config-checkout.outputs.commit }}"
           git show HEAD
+
+          git push origin update-${{ github.job }}
