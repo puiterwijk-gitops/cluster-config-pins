@@ -1,0 +1,30 @@
+on:
+  workflow_dispatch:
+    inputs:
+      cluster:
+        description: "Cluster name"
+        required: true
+        type: choice
+        options:
+          - hub
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+      - name: Cluster Config checkout
+        id: cluster-config-checkout
+        uses: actions/checkout@v4
+        with:
+          repository: "puiterwijk-gitops/cluster-config"
+          ref: "main"
+          path: "/tmp/cluster-config"
+          sparse-checkout: .
+      - name: Print ref
+        run: |
+          echo "SHA: ${{ steps.cluster-config-checkout.outputs.ref }}"
+      - name: Print commit
+        run: |
+          echo "Commit: ${{ steps.cluster-config-checkout.outputs.commit }}"
