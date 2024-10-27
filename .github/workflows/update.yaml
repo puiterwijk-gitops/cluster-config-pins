@@ -14,11 +14,14 @@ jobs:
   update:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       pull-requests: write
     steps:
       - name: Code Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          token: "${{ secrets.PUSH_TOKEN }}"
       - name: Cluster Config checkout
         id: cluster-config-checkout
         uses: actions/checkout@v4
@@ -27,6 +30,7 @@ jobs:
           ref: "main"
           path: "cluster-config-repo"
           sparse-checkout: .
+          persist-credentials: false
       - name: Print commit
         run: |
           echo "Commit: ${{ steps.cluster-config-checkout.outputs.commit }}"
