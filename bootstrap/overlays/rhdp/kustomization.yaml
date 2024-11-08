@@ -1,2 +1,2 @@
 resources:
-  - github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/rhdp?ref=ea4d209a26c6432bc59fffc73bc947e0462a0201
+  - github.com/puiterwijk-gitops/cluster-config/bootstrap/overlays/rhdp?ref=ce6c3a6a31cc4bd31c5365b9e777496768a17b72
